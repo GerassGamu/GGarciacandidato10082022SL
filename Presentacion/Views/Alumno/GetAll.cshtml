@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Alumnos:</h2>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<br />
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/AlumnoCRUD.js"></script>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-1" style="padding-left:100px">
+            <button type="button" class=" btn btn-success" id="btnGuardar" onclick="ShowModal()">Agregar</button>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblAlumno" class="table table-hover" border="1">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Editar</th>
+
+                        <th class="text-center" scope="col">IdAlumno</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Apellido Paterno</th>
+                        <th class="text-center" scope="col">Apellido Materno</th>
+
+                        <th class="text-center" scope="col">Eliminar</th>
+                    </tr>
+
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="ModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="lblTitulo">Modificar Empleado:</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="txtIdEmpleado" placeholder="IdEmpleado" disabled="disabled" />
+                        <input type="text" class="hidden" id="txtIdEmpleado" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="txtApellidoPaterno" placeholder="Apellido Paterno" />
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Materno:</label>
+                        <input type="text" class="form-control" id="txtApellidoMaterno" placeholder="Apellido Materno" />
+                    </div>
+
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="btnGuardar" onclick="Guardar()">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalle</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>
+                                Acción completada con éxito
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" value="Regresar" data-dismiss="modal">Regresar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~//bootstrap.css" rel="stylesheet" />
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () { //click
+            GetAll();
+
+        });
+
+        function GetAll() {
+            $.ajax({
+                type: 'GET',
+                url: '/AlumnoController/Get',
+                success: function (result) { //200 OK
+                    $('#SubCategorias tbody').empty();
+                    $.each(result.Objects, function (i, alumno) {
+                        var filas = '<tr>'
+                            + '<td class="text-center"> <button class="btn btn-primary" onclick="GetById(' + alumno.IdAlumno + ')"><span class="glyphicon glyphicon-retweet"" style="color:#FFFFFF"></span></button></td>' + '</a> ' + '</td>'
+
+                            + "<td  id='id' class='text-center'>" + alumno.IdAlumno + "</td>"
+                            + "<td class='text-center'>" + alumno.Nombre + "</td>"
+                            + "<td class='text-center'>" + alumno.ApellidoPaterno + "</td>"
+                            + "<td class='text-center'>" + alumno.ApellidoMaterno "</td>"
+
+                                + '<td class="text-center"> <button class="btn btn-primary" onclick="Eliminar(' + alumno.IdAlumno + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+
+                                + "</tr>";
+                        $("#SubCategorias tbody").append(filas);
+                    });
+                },
+                error: function (result) {
+                    alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+                }
+            });
+        };
+
+
+        function Modal() {
+            var mostrar = $('#ModalUpdate').modal('show');
+            IniciarAlumno();
+
+        }
+
+
+        function Actualizar() {
+            var alumno = {
+                IdAlumno: $('#IdAlumno').val(),
+                Nombre: $('#Nombre').val(),
+                ApellidoPaterno: $('#ApellidoPaterno').val(),
+                ApellidoMaterno: $('#ApellidoMaterno').val(),
+                Email: $('#Email').val(),
+                Password: $('#Password').val()
+
+
+
+            }
+
+            if (alumno.IdAlumno == '') {
+                Add(alumno);
+
+            }
+            else {
+                Update(alumno);
+            }
+        }
+
+        function IniciarAlumno() {
+
+            var alumno = {
+                IdMateria: $('#IdAlumno').val(''),
+                Nombre: $('#Nombre').val(''),
+                ApellidoPaterno: $('#ApellidoPaterno').val(''),
+                ApellidoMaterno: $('#ApelldioMaterno').val(''),
+                Email: $('#Email').val(''),
+                Password: $('#Password').val('')
+
+            }
+        }
+
+        function Add(alumno) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Alumno/Add',
+                dataType: 'json',
+                data: JSON.stringify(alumno),
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    $('#myModal').modal();
+                    $('#ModalUpdate').modal('hide');
+                    GetAll();
+                }
+            });
+        };
+
+        function Eliminar(IdAlumno) {
+
+            if (confirm("¿Estas seguro de eliminar la materia seleccionado?")) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Alumno/Delete/?IdAlumno=' + IdAlumno,
+                    success: function (result) {
+                        $('#myModal').modal();
+                        GetAll();
+                    },
+                    error: function (result) {
+                        alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+                    }
+                });
+
+            };
+        };
+
+
+
+        function GetById(IdAlumno) {
+            $.ajax({
+                type: 'GET',
+                url: '/Alumno/GetById/?IdAlumno=' + IdAlumno,
+                success: function (result) {
+                    $('#IdAlumno').val(result.Object.IdAlumno);
+                    $('#Nombre').val(result.Object.Nombre);
+                    $('#ApelldoPaterno').val(result.Object.ApellidoPaterno);
+                    $('#ApellidoMaterno').val(result.Object.ApellidoMaterno);
+                    $('#Email').val(result.Object.Email);
+                    $('#Password').val(result.Object.Password);
+
+                    $('#ModalUpdate').modal('show');
+                },
+                error: function (result) {
+                    alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+                }
+
+
+            });
+
+        }
+
+        function Update(alumno) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Alumno/Update?IdAlumno=' + IdAlumno,
+                datatype: 'json',
+                data: JSON.stringify(alumno),
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    $('#myModal').modal();
+                    $('#ModalUpdate').modal('hide');
+                    GetAll();
+                },
+                error: function (result) {
+                    alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+                }
+            });
+
+        };</script>
+}*@

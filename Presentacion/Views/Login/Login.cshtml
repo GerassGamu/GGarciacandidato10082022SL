@@ -1,0 +1,63 @@
+﻿@model Negocio.Alumno
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/Login.css" asp-append-version="true" />
+
+</head>
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div>Control</div>
+    <br />
+    <div><span>Escolar</span></div>
+</div>
+<br>
+<body>
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <form>
+
+
+            <div class="login">
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-2" })
+                    <br />
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", type = "text", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "control-label col-md-2" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", type = "text", @id = "txtAP" })
+                            @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                        </div>
+
+                      
+                        <button type="submit">Acceder</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+
+    }
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentacion", "Presentacion\Presentacion.csproj", "{87B75FE9-9A99-4036-94A6-2D793259ED79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{3EB57C13-6BBC-43AF-9EF5-A59A17CF331B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{E87167F0-046D-4C45-9108-5BB7EDEAF133}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87B75FE9-9A99-4036-94A6-2D793259ED79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B75FE9-9A99-4036-94A6-2D793259ED79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B75FE9-9A99-4036-94A6-2D793259ED79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B75FE9-9A99-4036-94A6-2D793259ED79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB57C13-6BBC-43AF-9EF5-A59A17CF331B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB57C13-6BBC-43AF-9EF5-A59A17CF331B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB57C13-6BBC-43AF-9EF5-A59A17CF331B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB57C13-6BBC-43AF-9EF5-A59A17CF331B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E87167F0-046D-4C45-9108-5BB7EDEAF133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E87167F0-046D-4C45-9108-5BB7EDEAF133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E87167F0-046D-4C45-9108-5BB7EDEAF133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E87167F0-046D-4C45-9108-5BB7EDEAF133}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D7D8720-4578-4EC8-A6DB-108024B9EB19}
+	EndGlobalSection
+EndGlobal
